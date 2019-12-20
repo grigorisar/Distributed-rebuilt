@@ -10,7 +10,7 @@
 <body>
 <div id="wrapper">
     <div id="header">
-        <h2>CRM - Customer Relationship Manager</h2>
+        <h2> UDM - User Data Manager</h2>
     </div>
 </div>
 
@@ -21,15 +21,19 @@
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Email</th>
+                <th>Department</th>
+                <th>Year</th>
+                <th>Failed Classes</th>
             </tr>
             <!-- loop over and print our customers -->
-            <c:forEach var="tempCustomer" items="${customers}">
+            <c:forEach var="tempStudent" items="${students}">
 
                 <tr>
-                    <td>${tempCustomer.firstName}</td>
-                    <td>${tempCustomer.lastName}</td>
-                    <td>${tempCustomer.email}</td>
+                    <td>${tempStudent.fname}</td>
+                    <td>${tempStudent.lname}</td>
+                    <td>${tempStudent.department}</td>
+                    <td>${tempStudent.year}</td>
+                    <td>${tempStudent.failedClass}</td>
                 </tr>
             </c:forEach>
         </table>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>HelloWorld - Input Form</title>
+    <title>HelloWorld - Input Form</title>
 </head>
 <body>
 <form action="processFormv2" method="GET">
-<input type="text" name="studentName" placeholder="What's your name?"/>
-<input type="submit" />
+    <input type="text" name="studentUserName" placeholder="What's your username?"/>
+    <input type="submit"/>
 </form>
 </body>
 </html>

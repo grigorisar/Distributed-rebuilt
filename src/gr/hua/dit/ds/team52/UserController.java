@@ -1,4 +1,4 @@
-package gr.hua.dit.springmvc1;
+package gr.hua.dit.ds.team52;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class UserController {
 
-	@RequestMapping("/")
-	public String showMyPage() {
-		   return "index";
-		}
+    @RequestMapping("/")
+    public String showMyPage() {
+        return "index";
+    }
 }
