@@ -19,6 +19,7 @@
         <!--  add our html table here -->
         <table>
             <tr>
+                <th>Username</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Department</th>
@@ -29,11 +30,12 @@
             <c:forEach var="tempStudent" items="${students}">
 
                 <tr>
-                    <td>${tempStudent.fname}</td>
-                    <td>${tempStudent.lname}</td>
-                    <td>${tempStudent.department}</td>
+                    <td>${tempStudent.username}</td>
+                    <td>${tempStudent.firstName}</td>
+                    <td>${tempStudent.lastName}</td>
+                    <td>${tempStudent.dept}</td>
                     <td>${tempStudent.year}</td>
-                    <td>${tempStudent.failedClass}</td>
+                    <td>${tempStudent.failed}</td>
                 </tr>
             </c:forEach>
         </table>

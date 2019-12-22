@@ -1,4 +1,4 @@
-package gr.hua.dit.ds.team52;
+package gr.hua.dit.ds.team52.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

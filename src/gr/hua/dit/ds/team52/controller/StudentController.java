@@ -1,7 +1,7 @@
 package gr.hua.dit.ds.team52.controller;
 
-import gr.hua.dit.ds.team52.dao.CustomerDAO;
-import gr.hua.dit.ds.team52.entity.Student;
+import gr.hua.dit.ds.team52.actors.StudentEntity;
+import gr.hua.dit.ds.team52.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +15,13 @@ public class StudentController {
 
     //Inject DAO its the same for all objects
     @Autowired
-    private CustomerDAO customerDAO;
+    private UserDAO userDAO;
 
     @RequestMapping("/list")
     public String listStudents(Model model){
 
         // get customers from dao
-        List<Student> students = customerDAO.getStudents();
+        List<StudentEntity> students = userDAO.getStudentList();
 
         // add the customers to the model
         model.addAttribute("students", students);

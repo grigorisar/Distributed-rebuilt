@@ -3,8 +3,8 @@ package gr.hua.dit.ds.team52.entity;
 import javax.persistence.*;
 
 
-@Entity
-@Table(name="petition")
+//@Entity
+//@Table(name="petition")
 public class Petition {
     // define fields
 
@@ -22,9 +22,9 @@ public class Petition {
     @Column(name="status")
     private String status;
 
-    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name="student_id")
-    private Student student;
+//    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+//    @JoinColumn(name="student_id")
+//    private Student student;
 
     // define constructors
     public Petition() {
@@ -66,13 +66,13 @@ public class Petition {
         this.status = "rejected";
     }
 
-    public Student getStudent() {
-        return student;
-    }
+//    public Student getStudent() {
+//        return student;
+//    }
 
-    public void setStudent(Student student) {
-        this.student = student;
-    }
+//    public void setStudent(Student student) {
+//        this.student = student;
+//    }
 
     // define toString
     @Override

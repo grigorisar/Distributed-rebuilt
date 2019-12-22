@@ -16,7 +16,7 @@
 
 
     <!--  application properties file -->
-    <context:property-placeholder location="classpath:/application.properties"/>
+<!--    <context:property-placeholder location="classpath:/application.properties"/>-->
 
 
     <!-- Add support for component scanning -->
@@ -38,9 +38,9 @@
           class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
         <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="jdbcUrl" value="${jdbc.url}"/>
-        <property name="user" value="${jdbc.user}"/>
-        <property name="password" value="${jdbc.password}"/>
+        <property name="jdbcUrl" value="jdbc:mysql://remotemysql.com:3306/wM4YgjeZJi?useSSL=false"/>
+        <property name="user" value="wM4YgjeZJi"/>
+        <property name="password" value="1FOZBzM9Vt"/>
 
         <!-- these are connection pool properties for C3P0 -->
         <property name="initialPoolSize" value="5"/>
@@ -53,7 +53,7 @@
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="myDataSource"/>
-        <property name="packagesToScan" value="gr.hua.dit.ds.team52.entity"/>
+        <property name="packagesToScan" value="gr.hua.dit.ds.team52"/>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>

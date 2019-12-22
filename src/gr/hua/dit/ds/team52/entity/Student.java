@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity
-@DiscriminatorValue("Student")  //What appears under user_type from the inherited class, user.java
-@Table(name = "student")
+//@Entity
+//@DiscriminatorValue("Student")  //What appears under user_type from the inherited class, user.java
+//@Table(name = "student_second")
 public class Student extends User {
     @Column(name = "dept")
     private String department;
@@ -16,8 +16,8 @@ public class Student extends User {
     @Column(name = "failed")
     private int failedClass;
 
-    @OneToMany(mappedBy="student", cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    private List<Petition> petitionList;
+//    @OneToMany(mappedBy="student_second", cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+//    private List<Petition> petitionList;
 
     public Student() {
             // DEFAULT CONSTRUCTOR
@@ -62,22 +62,22 @@ public class Student extends User {
         this.failedClass = failedClass;
     }
 
-    public List<Petition> getPetitionList() {
-        return petitionList;
-    }
+//    public List<Petition> getPetitionList() {
+//        return petitionList;
+//    }
 
-    public void setPetitionList(List<Petition> petitionList) {
-        this.petitionList = petitionList;
-    }
+//    public void setPetitionList(List<Petition> petitionList) {
+//        this.petitionList = petitionList;
+//    }
 
-    // add convenience methods for bi-directional relation
-    public void add(Petition apetition) {
-        if(petitionList == null) {
-            petitionList = new ArrayList<>();
-        }
-        petitionList.add(apetition);
-        apetition.setStudent(this);
-    }
+        // add convenience methods for bi-directional relation
+//    public void add(Petition apetition) {
+//        if(petitionList == null) {
+//            petitionList = new ArrayList<>();
+//        }
+//        petitionList.add(apetition);
+//        apetition.setStudent(this);
+//    }
 
     public boolean canSubmit() {
         if (year >= 3 && failedClass <= 3) {

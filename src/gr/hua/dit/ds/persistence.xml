@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="persistenceUnit">
+        <mapping-file>ds/team52/actors/mapping.xml</mapping-file>
+        <class>gr.hua.dit.ds.team52.actors.AdminEntity</class>
+        <class>gr.hua.dit.ds.team52.actors.InternshipEntity</class>
+        <class>gr.hua.dit.ds.team52.actors.PetitionEntity</class>
+        <class>gr.hua.dit.ds.team52.actors.StaffEntity</class>
+        <class>gr.hua.dit.ds.team52.actors.SupportedServicesEntity</class>
+        <class>gr.hua.dit.ds.team52.actors.UserEntity</class>
+        <class>gr.hua.dit.ds.team52.actors.AuthoritiesEntity</class>
+        <class>gr.hua.dit.ds.team52.actors.StudentEntity</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:mysql://remotemysql.com:3306/wM4YgjeZJi"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+        </properties>
+    </persistence-unit>
+</persistence>

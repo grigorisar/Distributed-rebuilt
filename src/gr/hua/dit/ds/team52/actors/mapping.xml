@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="gr.hua.dit.ds.team52.actors.AdminEntity">
+        <table name="admin" schema="wM4YgjeZJi" catalog=""/>
+        <attributes>
+            <id name="username">
+                <column name="username" length="50"/>
+            </id>
+            <basic name="password">
+                <column name="password" length="100"/>
+            </basic>
+            <basic name="firstName">
+                <column name="first_name" length="45"/>
+            </basic>
+            <basic name="lastName">
+                <column name="last_name" length="45"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="gr.hua.dit.ds.team52.actors.InternshipEntity">
+        <table name="internship" schema="wM4YgjeZJi" catalog=""/>
+        <attributes>
+            <id name="title">
+                <column name="title" length="30"/>
+            </id>
+            <basic name="description">
+                <column name="description" length="45"/>
+            </basic>
+            <basic name="salary">
+                <column name="salary" precision="8"/>
+            </basic>
+            <basic name="status">
+                <column name="status" length="8"/>
+            </basic>
+            <basic name="approved">
+                <column name="approved" precision="1"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="gr.hua.dit.ds.team52.actors.PetitionEntity">
+        <table name="petition" schema="wM4YgjeZJi" catalog=""/>
+        <attributes>
+            <id name="studentUsername">
+                <column name="student_username" length="50"/>
+            </id>
+            <basic name="title">
+                <column name="title" nullable="false" length="45"/>
+            </basic>
+            <basic name="description">
+                <column name="description" nullable="false"/>
+            </basic>
+            <basic name="status">
+                <column name="status" length="8"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="gr.hua.dit.ds.team52.actors.StaffEntity">
+        <table name="staff" schema="wM4YgjeZJi" catalog=""/>
+        <attributes>
+            <id name="username">
+                <column name="username" length="50"/>
+            </id>
+            <basic name="password">
+                <column name="password" length="100"/>
+            </basic>
+            <basic name="firstName">
+                <column name="first_name" nullable="false" length="45"/>
+            </basic>
+            <basic name="lastName">
+                <column name="last_name" nullable="false" length="45"/>
+            </basic>
+            <basic name="position">
+                <column name="position" nullable="false" length="30"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="gr.hua.dit.ds.team52.actors.SupportedServicesEntity">
+        <table name="supported_services" schema="wM4YgjeZJi" catalog=""/>
+        <attributes>
+            <basic name="title">
+                <column name="title" length="30"/>
+            </basic>
+            <basic name="description">
+                <column name="description" length="45"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="gr.hua.dit.ds.team52.actors.UserEntity">
+        <table name="user" schema="wM4YgjeZJi" catalog=""/>
+        <attributes>
+            <id name="username">
+                <column name="username" length="50"/>
+            </id>
+            <basic name="password">
+                <column name="password" length="100"/>
+            </basic>
+            <basic name="enabled">
+                <column name="enabled" precision="1"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
