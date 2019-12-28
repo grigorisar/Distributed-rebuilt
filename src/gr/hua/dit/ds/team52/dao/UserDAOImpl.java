@@ -1,5 +1,6 @@
 package gr.hua.dit.ds.team52.dao;
 
+import gr.hua.dit.ds.team52.entity.Authorities;
 import gr.hua.dit.ds.team52.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -51,4 +52,71 @@ public class UserDAOImpl implements UserDAO {
 
         return true;
     }
+
+    @Override
+    @Transactional
+    public Boolean updateUser(User user) {
+
+        try {
+            Session currentsession=sessionFactory.getCurrentSession();
+
+            currentsession.update(user);
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional
+    public boolean deleteUser(String username) {
+
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        try {
+
+            int q = currentSession.createSQLQuery(" DELETE FROM `user` WHERE `username`IN ('" + username + "');").executeUpdate();
+
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    @Transactional
+    public Boolean addAuthority(Authorities authority) {
+        try {
+            Session currentsession=sessionFactory.getCurrentSession();
+
+            currentsession.save(authority);
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    @Transactional
+    public Boolean updateAuthority(Authorities authority) {
+        try {
+            Session currentsession=sessionFactory.getCurrentSession();
+
+            currentsession.update(authority);
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            return false;
+        }
+
+        return true;
+    }
+
+
 }

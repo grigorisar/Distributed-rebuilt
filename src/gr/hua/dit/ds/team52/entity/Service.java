@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Service {
 
     @Id
-    @Column(name ="id",nullable = false)
+    @Column(name ="id",nullable = false, updatable = false)
     private int id;
     @Basic
     @Column(name = "title", nullable = false)

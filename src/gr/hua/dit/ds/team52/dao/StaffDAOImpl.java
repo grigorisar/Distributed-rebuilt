@@ -1,9 +1,6 @@
 package gr.hua.dit.ds.team52.dao;
 
-import gr.hua.dit.ds.team52.entity.Internship;
-import gr.hua.dit.ds.team52.entity.Petition;
-import gr.hua.dit.ds.team52.entity.Service;
-import gr.hua.dit.ds.team52.entity.Staff;
+import gr.hua.dit.ds.team52.entity.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,6 +27,38 @@ public class StaffDAOImpl implements StaffDAO {
         // execute the query and get the results list
         List<Staff> staff = query.getResultList();
         return staff;
+    }
+
+    @Override
+    @Transactional
+    public Boolean saveStaff(Staff staff) {
+        /**
+         * This function is both an UPDATE and INSERT tool.
+         */
+        Session currentsession=sessionFactory.getCurrentSession();
+
+        if (staff.getId()!=0) {
+            currentsession.update(staff);
+        }else {
+            currentsession.save(staff);
+        }
+        return true;
+    }
+
+    @Override
+    @Transactional
+    public Boolean deleteStaff(String username) {
+        /**
+         * This function is both an UPDATE and INSERT tool.
+         */
+        Session currentsession=sessionFactory.getCurrentSession();
+
+        try {
+            currentsession.delete(username,Staff.class);
+        }catch (Exception e){
+            return false;           //TODO
+        }
+        return true;
     }
 
     @Override
@@ -79,4 +108,54 @@ public class StaffDAOImpl implements StaffDAO {
             List<Internship> internships = query.getResultList();
             return internships;
         }
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional
+    public boolean updateStaff(String old_username, String username, String firstname, String lastname, String position) {
+
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        try {
+            int q =0;
+
+            if (old_username.equals(username)) {
+
+            }   else {
+
+                q = currentSession.createSQLQuery("UPDATE `user` SET `username` = '" + username + "'  WHERE `user`.`username` = '" + old_username + "';").executeUpdate();
+
+            }
+
+            q = currentSession.createSQLQuery("UPDATE `staff` SET  `first_name` = '" + firstname + "', `last_name` = '" + lastname + "'," +
+                    " `position` = '" + position + "' WHERE `student`.`username` = '" + username + "'; ").executeUpdate();
+
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional
+    public boolean addStaff(String username, String password, String firstname, String lastname, String role, String position) {
+        // get current hibernate session
+        Session currentSession = sessionFactory.getCurrentSession();
+
+//        UserEntity e = new UserEntity();
+//        StudentEntity s =new StudentEntity();
+
+        try {
+
+            int q = currentSession.createSQLQuery("INSERT INTO `user` (`username`, `password`, `enabled`) VALUES ( '" + username + "' , '" + password + "' ,  '1')").executeUpdate();
+
+            q = currentSession.createSQLQuery("INSERT INTO `staff` (`id`, `first_name`, `last_name`, `username`, `position`) VALUES ( NULL, '" + firstname + "', '" +
+                    lastname + "', '" + username + "', '" + position + "');").executeUpdate();
+
+            q = currentSession.createSQLQuery("INSERT INTO authorities (username, authority) VALUES ('" + username +"', '" + role + "') ").executeUpdate();
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+
+    }
 }

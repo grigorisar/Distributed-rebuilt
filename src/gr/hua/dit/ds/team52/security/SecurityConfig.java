@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
@@ -26,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.jdbcAuthentication()
                 .dataSource(myDataSource)
+                .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery("select username, password, enabled "
                         + "from user "
                         + "where username = ?")
@@ -39,22 +42,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/**/").permitAll()
-                .antMatchers("/user/**").permitAll()             //TODO Maybe should have role "USER"
-                .antMatchers("/admin/**").hasRole("ADMIN")               //should not start with _ROLE
+                .antMatchers("/").permitAll()
+                .antMatchers("/user/**").permitAll()             //TODO Maybe should have role "USER" => no
+                .antMatchers("/manager/**").hasRole("ADMIN")               //should not start with _ROLE
                 .antMatchers("/student/**").hasRole("STUDENT")
                 .antMatchers("/staff/**").hasRole("STAFF")
                 .anyRequest().authenticated()
                 .and()
                 //.loginProcessingUrl("/authUser") for custom login page
-                .formLogin()
-                .and()
-                .csrf().disable();;
+                .formLogin();
+//                .and()
+//                .csrf().disable();;
     }
 
-    //public static PasswordEncoder encoder() {
-    //    return new BCryptPasswordEncoder();
-    //}
+
+    private PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 }
 
 

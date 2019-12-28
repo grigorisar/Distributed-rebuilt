@@ -1,5 +1,7 @@
 package gr.hua.dit.ds.team52.entity;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;

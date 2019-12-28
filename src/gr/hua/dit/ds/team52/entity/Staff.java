@@ -5,10 +5,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "staff")
 public class Staff {
-    @Basic
-    @Column(name = "password", nullable = false, length = 100)
-    private String password;
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, updatable = false)
+    private int id;
     @Column(name = "username", nullable = false, length = 50)
     private String username;
     @Basic
@@ -21,15 +22,20 @@ public class Staff {
     @Column(name = "position", nullable = true, length = 30)
     private String position;
 
-
-    public String getPassword() {
-        return password;
+    public int getId() {
+        return id;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setId(int id) {
+        this.id = id;
     }
 
+    public Staff () {
+
+    }
+
+    public Staff(String firstName, String lastName, String position, String username) {
+    }
 
     public String getUsername() {
         return username;

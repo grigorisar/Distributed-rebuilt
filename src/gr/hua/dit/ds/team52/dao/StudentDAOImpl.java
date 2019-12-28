@@ -44,8 +44,81 @@ public class StudentDAOImpl implements StudentDAO {
             currentsession.update(student);
         }else {
             currentsession.save(student);
+
         }
         return true;
+    }
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional
+    public boolean updateStudent(String old_username, String username, String firstname, String lastname, String failed, String dept, String year) {
+
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        try {
+            int q =0;
+
+            if (old_username.equals(username)) {
+
+            }   else {
+
+                q = currentSession.createSQLQuery("UPDATE `user` SET `username` = '" + username + "'  WHERE `user`.`username` = '" + old_username + "';").executeUpdate();
+
+            }
+
+            q = currentSession.createSQLQuery("UPDATE `student` SET  `first_name` = '" + firstname + "', `last_name` = '" + lastname + "'," +
+                    " `dept` = '" + dept + "', `year` = '" + year + "', `failed` = '" + failed + "' WHERE `student`.`username` = '" + username + "'; ").executeUpdate();
+
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    @Transactional
+    public Boolean deleteStudent(String username) {
+
+        Session currentsession=sessionFactory.getCurrentSession();
+
+        try {
+            currentsession.delete(username, Student.class);
+        }catch (Exception e){
+            return false;           //TODO
+        }
+        return true;
+
+    }
+
+    @Override
+    @Transactional
+    public boolean addStudent(String username, String password, String firstname, String lastname, String role, int failed, String dept, String year) {
+        // get current hibernate session
+        Session currentSession = sessionFactory.getCurrentSession();
+
+//        UserEntity e = new UserEntity();
+//        StudentEntity s =new StudentEntity();
+
+        try {
+
+            int q = currentSession.createSQLQuery("INSERT INTO `user` (`username`, `password`, `enabled`) VALUES ( '" + username + "' , '" + password + "' ,  '1')").executeUpdate();
+
+            System.out.println(q);
+
+            q = currentSession.createSQLQuery("INSERT INTO `student` (`id`, `first_name`, `last_name`, `username`, `dept`, `year`, `failed`) VALUES ( NULL, '" + firstname + "', '" +
+                    lastname + "', '" + username + "', '" + dept + "', '" + year + "', '" + year + "');").executeUpdate();
+
+            System.out.println(q);
+
+            q = currentSession.createSQLQuery("INSERT INTO authorities (username, authority) VALUES ('" + username +"', '" + role + "') ").executeUpdate();
+
+            System.out.println(q);
+
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+
     }
 
     @Override
