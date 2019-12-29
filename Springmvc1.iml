@@ -22,7 +22,9 @@
           <factory-entry name="Entities" value="fa872b03-6299-48c4-b8e1-65db9af0ed57" />
           <factory-entry name="persistenceUnit" value="fa872b03-6299-48c4-b8e1-65db9af0ed57" />
         </datasource-mapping>
-        <naming-strategy-map />
+        <naming-strategy-map>
+          <unit-entry name="persistenceUnit" />
+        </naming-strategy-map>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/gr/hua/dit/ds/persistence.xml" />
       </configuration>
     </facet>
@@ -83,5 +85,6 @@
     <orderEntry type="library" name="Maven: com.sun.xml.fastinfoset:FastInfoset:1.2.16" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:2.0.1.Final" level="project" />
     <orderEntry type="library" name="jquery-1.10.2" level="application" />
+    <orderEntry type="library" name="jquery-3.4.1" level="application" />
   </component>
 </module>

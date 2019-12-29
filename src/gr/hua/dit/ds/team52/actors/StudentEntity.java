@@ -14,7 +14,7 @@ public class StudentEntity {
     private Integer failed;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = true)
     public int getId() {
         return id;
     }
@@ -43,11 +43,11 @@ public class StudentEntity {
         this.lastName = lastName;
     }
 
-    @Basic
-    @Column(name = "password", nullable = false, length = 100)
-    public String getPassword() {
-        return password;
-    }
+//    @Basic
+//    @Column(name = "password", nullable = false, length = 100)
+//    public String getPassword() {
+//        return password;
+//    }
 
     public void setPassword(String password) {
         this.password = password;

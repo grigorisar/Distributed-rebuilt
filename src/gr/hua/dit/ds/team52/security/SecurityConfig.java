@@ -1,11 +1,14 @@
 package gr.hua.dit.ds.team52.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
@@ -26,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.jdbcAuthentication()
                 .dataSource(myDataSource)
+                .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery("select username, password, enabled "
                         + "from user "
                         + "where username = ?")
@@ -36,25 +40,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+
+    private PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/**/").permitAll()
+//                .antMatchers("/**/").permitAll()
                 .antMatchers("/user/**").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")               //should not start with _ROLE
+                .antMatchers("/manager/**").hasRole("ADMIN")               //should not start with _ROLE
                 .antMatchers("/student/**").hasRole("STUDENT")
                 .antMatchers("/staff/**").hasRole("STAFF")
                 .anyRequest().authenticated()
                 .and()
-                //.loginProcessingUrl("/authUser") for custom login page
-                .formLogin()
-                .and()
-                .csrf().disable();;
+//                .loginProcessingUrl("/authUser") for custom login page
+                .formLogin();
+//                .and()
+//                .csrf().disable();
     }
 
-    //public static PasswordEncoder encoder() {
-    //    return new BCryptPasswordEncoder();
-    //}
+    public void changeURLRestrictions (int key) {       //TODO provide a function for each service and change the antMatchers above for the admin tool
+
+    }
+
 }
 
 

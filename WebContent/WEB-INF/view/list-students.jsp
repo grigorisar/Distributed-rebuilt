@@ -26,7 +26,7 @@
                 <th>Year</th>
                 <th>Failed Classes</th>
             </tr>
-            <!-- loop over and print our customers -->
+            <!-- loop over and print our students -->
             <c:forEach var="tempStudent" items="${students}">
 
                 <tr>
