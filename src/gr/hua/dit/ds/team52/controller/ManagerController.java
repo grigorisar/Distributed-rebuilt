@@ -101,10 +101,10 @@ public class ManagerController {
         @RequestMapping("/service")
         public String serviceManager(Model model) {
             // get services from dao
-            List<Service> services = staffDAO.getServices();
+//            List<Service> services = staffDAO.getServices();
 
             // add the services to the model
-            model.addAttribute("services", services);
+//            model.addAttribute("services", services);
 
             return "manager/list-services";
         }

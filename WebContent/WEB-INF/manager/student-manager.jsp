@@ -248,6 +248,9 @@
 
     </div>
 
+    <br>
+    <div id="bottom" align="center"></div>
+
     <script type="text/javascript">
 
     $('table tr').mouseover(function() {    //on hover color script
@@ -269,7 +272,7 @@
 
     var selected = table.getElementsByClassName('selected');
 
-  table.onclick = highlight;  
+    table.onclick = highlight;
 
   
 $(document).ready(function() {
@@ -373,14 +376,14 @@ $(document).ready(function() {
             success: function(data) {                                   //on success of ajax
                 //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
                 console.log("posting sucessful");
-                $("#bottom1").empty().append(data)
+                $("#bottom").empty().append(data)
             },
             error: function(xhr, request, error) {                                 //on error
                 //  = eval("(" + xhr.responseText + ")");       //eval is evil dont use it
                 // alert(err.Message);
                 let err = xhr.responseText
                 alert(err)
-                $('#bottom1').empty().append("Error Encountered with request " + error)
+                $('#bottom').empty().append("Error Encountered with request " + error)
 
             },
             complete: function () {                             //on completion
@@ -404,12 +407,12 @@ $(document).ready(function() {
               // dataType: "plain/text",
               success: function(data) {            
                   console.log("posting sucessful")                      
-                  $("#bottom2").empty().append(data)
+                  $("#bottom").empty().append(data)
               },
               error: function(xhr, request, error) {                                
                   var err = xhr.responseText
                   alert(err)
-                  $('#bottom2').empty().append("Error Encountered with request " + error)
+                  $('#bottom').empty().append("Error Encountered with request " + error)
 
               },
               complete: function () {                             //on completion
@@ -438,12 +441,12 @@ $(document).ready(function() {
             // dataType: "plain/text",
             success: function(data) {
                 console.log("posting sucessful")
-                $("#bottom3").empty().append(data)
+                $("#bottom").empty().append(data)
             },
             error: function(xhr, request, error) {
                 var err = xhr.responseText
                 alert(err)
-                $('#bottom3').empty().append("Error Encountered with request " + error)
+                $('#bottom').empty().append("Error Encountered with request " + error)
 
             },
             complete: function () {                             //on completion

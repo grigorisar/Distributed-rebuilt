@@ -44,136 +44,85 @@
 </head>
 <body>
 
-<br>
+    <br>
 
 
-<table id="table" class="display"  align="center">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Username</th>
-        <th>Position Title</th>
-    </tr>
-    </thead>
-    <tbody id="table_body">
-
-    <c:forEach var="tempStaff" items="${staff}">
-
+    <table id="table" class="display"  align="center">
+        <thead>
         <tr>
-            <td>${tempStaff.id}</td>
-            <td>${tempStaff.firstName}</td>
-            <td>${tempStaff.lastName}</td>
-            <td>${tempStaff.username}</td>
-            <td>${tempStaff.position}</td>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+            <th>Position Title</th>
         </tr>
+        </thead>
+        <tbody id="table_body">
 
-    </c:forEach>
+        <c:forEach var="tempStaff" items="${staff}">
 
-    </tbody>
-</table>
+            <tr>
+                <td>${tempStaff.id}</td>
+                <td>${tempStaff.firstName}</td>
+                <td>${tempStaff.lastName}</td>
+                <td>${tempStaff.username}</td>
+                <td>${tempStaff.position}</td>
+            </tr>
 
-<br>
+        </c:forEach>
+
+        </tbody>
+    </table>
+
+    <br>
 
 
-<div class="pure-g">
+    <div class="pure-g">
 
-    <div align="center"    class="pure-u-1-3">
+        <div align="center"    class="pure-u-1-3">
 
-        <input type="button" name="addStaff" id="addStaff" value="Add Staff">
-        <br>
+            <input type="button" name="addStaff" id="addStaff" value="Add Staff">
+            <br>
 
-        <form style="display:none" id="staff_creation"  name="staff_creation" method="post" action="${pageContext.request.contextPath}/manager/create_user_process">
+            <form style="display:none" id="staff_creation"  name="staff_creation" method="post" action="${pageContext.request.contextPath}/manager/create_user_process">
 
-            <div class="form-group">
-                <label for="username">Username</label> <br>
-                <input required type="text" name="username" id="username" placeholder="Username" maxlength="50"><br>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label><br>
-                <input required type="password" name="password" id="password" placeholder="Password" maxlength="100"><br>
-
-            </div>
-
-            <div class="form-group">
-                <label for="firstname">First Name</label><br>
-                <input required type="text" name="firstname" id="firstname" placeholder="First Name" maxlength="45"><br>
-
-            </div>
-
-            <div class="form-group">
-                <label for="lastname">Last Name</label><br>
-                <input required type="text" name="lastname" id="lastname" placeholder="Last Name" maxlength="45"><br>
-
-            </div>
-
-            <div  class="form-group" id="PositionDiv">
-                <label for="position">Department</label><br>
-                <input required type="text" name="position" id="position" placeholder="Position Title" maxlength="45"><br>
-
-            </div>
-
-            <div class="form-group">
-                <input required type="submit" class="button" value = "Submit" id="create">
-            </div>
-
-            <div  class="form-group" >
-                <input hidden type="text" required name="role" id="role" value="Staff" ><br>
-            </div>
-            <!-- for the jquery ajax post request -->
-            <input type="hidden"
-                   name="${_csrf.parameterName}"
-                   value="${_csrf.token}"/>
-
-        </form>
-
-    </div>
-    <div align="center" class="pure-u-1-3">
-
-        <input type="button" name="updateStaff" id="updateStaff" value="Update Selected Staff">
-
-        <br>
-
-        <div style="display:none" id="update">
-
-            <form  id="staff_update"  name="staff_update" method="post" action="${pageContext.request.contextPath}/manager/update_user_process">
-                <!-- style="display:none" -->
                 <div class="form-group">
                     <label for="username">Username</label> <br>
-                    <input required type="text" name="username_u" id="username_u" placeholder="Username" maxlength="50"><br>
+                    <input required type="text" name="username" id="username" placeholder="Username" maxlength="50"><br>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label><br>
+                    <input required type="password" name="password" id="password" placeholder="Password" maxlength="100"><br>
+
                 </div>
 
                 <div class="form-group">
                     <label for="firstname">First Name</label><br>
-                    <input required type="text" name="firstname_u" id="firstname_u" placeholder="First Name" maxlength="45"><br>
+                    <input required type="text" name="firstname" id="firstname" placeholder="First Name" maxlength="45"><br>
 
                 </div>
 
                 <div class="form-group">
                     <label for="lastname">Last Name</label><br>
-                    <input required type="text" name="lastname_u" id="lastname_u" placeholder="Last Name" maxlength="45"><br>
+                    <input required type="text" name="lastname" id="lastname" placeholder="Last Name" maxlength="45"><br>
 
                 </div>
 
-
-                <div  class="form-group" >
+                <div  class="form-group" id="PositionDiv">
                     <label for="position">Department</label><br>
-                    <input required type="text" name="position_u" id="position_u" placeholder="Position Title" maxlength="45"><br>
-
-                </div>
-
-                <div  class="form-group" >
-                    <input hidden type="text" required name="old_username" id="old_username"  ><br>
+                    <input required type="text" name="position" id="position" placeholder="Position Title" maxlength="45"><br>
 
                 </div>
 
                 <div class="form-group">
-                    <input required type="submit" class="button" value = "Update" id="updateB">
-
+                    <input required type="submit" class="button" value = "Submit" id="create">
                 </div>
 
+                <div  class="form-group" >
+                    <input hidden type="text" required name="role" id="role" value="Staff" ><br>
+                </div>
+                <!-- for the jquery ajax post request -->
                 <input type="hidden"
                        name="${_csrf.parameterName}"
                        value="${_csrf.token}"/>
@@ -181,8 +130,61 @@
             </form>
 
         </div>
-    </div>
-    <div align="center" class="pure-u-1-3" >
+        <div align="center" class="pure-u-1-3">
+
+            <input type="button" name="updateStaff" id="updateStaff" value="Update Selected Staff">
+
+            <br>
+
+            <div style="display:none" id="update">
+
+                <form  id="staff_update"  name="staff_update" method="post" action="${pageContext.request.contextPath}/manager/update_user_process">
+                    <!-- style="display:none" -->
+                    <div class="form-group">
+                        <label for="username">Username</label> <br>
+                        <input required type="text" name="username_u" id="username_u" placeholder="Username" maxlength="50"><br>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname">First Name</label><br>
+                        <input required type="text" name="firstname_u" id="firstname_u" placeholder="First Name" maxlength="45"><br>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastname">Last Name</label><br>
+                        <input required type="text" name="lastname_u" id="lastname_u" placeholder="Last Name" maxlength="45"><br>
+
+                    </div>
+
+
+                    <div  class="form-group" >
+                        <label for="position">Department</label><br>
+                        <input required type="text" name="position_u" id="position_u" placeholder="Position Title" maxlength="45"><br>
+
+                    </div>
+
+                    <div  class="form-group" >
+                        <input hidden type="text" required name="old_username" id="old_username"  ><br>
+                    </div>
+
+                    <div  class="form-group" >
+                        <input hidden type="text" required name="role_u" id="role_u" value="Staff" ><br>
+                    </div>
+
+                    <div class="form-group">
+                        <input required type="submit" class="button" value = "Update" id="updateB">
+                    </div>
+
+                    <input type="hidden"
+                           name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/>
+
+                </form>
+
+            </div>
+        </div>
+        <div align="center" class="pure-u-1-3" >
 
         <input type="button" name="deleteStaff" id="deleteStaff" value="Delete Selected Staff">
 
@@ -190,7 +192,7 @@
 
         <div style="display:none" id="delete">
 
-            <form  id="staff_delete"  name="staff_delete" method="post" action="/Springmvc1_war_exploded/user/delete_user_process">
+            <form  id="staff_delete"  name="staff_delete" method="post" action="${pageContext.request.contextPath}/manager/delete_user_process">
                 <!-- style="display:none" -->
                 <div class="form-group">
                     <label for="username">Username</label> <br>
@@ -209,7 +211,9 @@
 
 
     </div>
-</div>
+    </div>
+    <br>
+    <div id="bottom" align="center"></div>
 
 <script type="text/javascript">
 
@@ -335,14 +339,14 @@
                 success: function(data) {                                   //on success of ajax
                     //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
                     console.log("posting sucessful");
-                    // $("#bottom1").empty().append(data)
+                    $("#bottom").empty().append(data)
                 },
                 error: function(xhr, request, error) {                                 //on error
                     //  = eval("(" + xhr.responseText + ")");       //eval is evil dont use it
                     // alert(err.Message);
                     let err = xhr.responseText
                     alert(err)
-                    // $('#bottom1').empty().append("Error Encountered with request " + error)
+                    $('#bottom').empty().append("Error Encountered with request " + error)
 
                 },
                 complete: function () {                             //on completion
@@ -366,12 +370,12 @@
                 // dataType: "plain/text",
                 success: function(data) {
                     console.log("posting sucessful")
-                    // $("#bottom2").empty().append(data)
+                    $("#bottom").empty().append(data)
                 },
                 error: function(xhr, request, error) {
                     var err = xhr.responseText
                     alert(err)
-                    // $('#bottom2').empty().append("Error Encountered with request " + error)
+                    $('#bottom').empty().append("Error Encountered with request " + error)
 
                 },
                 complete: function () {                             //on completion
@@ -400,12 +404,12 @@
                 // dataType: "plain/text",
                 success: function(data) {
                     console.log("posting sucessful")
-                    // $("#bottom3").empty().append(data)
+                    $("#bottom").empty().append(data)
                 },
                 error: function(xhr, request, error) {
                     var err = xhr.responseText
                     alert(err)
-                    // $('#bottom3').empty().append("Error Encountered with request " + error)
+                    $('#bottom').empty().append("Error Encountered with request " + error)
 
                 },
                 complete: function () {                             //on completion

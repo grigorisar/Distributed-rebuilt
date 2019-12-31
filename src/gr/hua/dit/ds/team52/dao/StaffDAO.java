@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface StaffDAO {
     public List<Petition> getPetitions();
-    public List<Service> getServices();
     public Service searchService(String title);
     public List<Staff> getStaff();
     public List<Internship> getInternships();

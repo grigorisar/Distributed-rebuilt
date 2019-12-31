@@ -75,20 +75,6 @@ public class StaffDAOImpl implements StaffDAO {
     }
 
     @Override
-    @Transactional
-    public List<Service> getServices(){
-        Session currentSession = sessionFactory.getCurrentSession();
-
-        // create a query
-        Query<Service> query = currentSession.createQuery("from Service", Service.class);
-
-        System.out.println(query.getFirstResult());
-        // execute the query and get the results list
-        List<Service> services = query.getResultList();
-        return services;
-    }
-
-    @Override
     public Service searchService(String title) {
         Session currentSession = sessionFactory.getCurrentSession();
         // create a query
@@ -116,18 +102,17 @@ public class StaffDAOImpl implements StaffDAO {
         Session currentSession = sessionFactory.getCurrentSession();
 
         try {
-            int q =0;
 
-            if (old_username.equals(username)) {
+            if (old_username.equals(username)) {                //change the username if it's different from the old one with a query to the user table
 
             }   else {
 
-                q = currentSession.createSQLQuery("UPDATE `user` SET `username` = '" + username + "'  WHERE `user`.`username` = '" + old_username + "';").executeUpdate();
+                 currentSession.createSQLQuery("UPDATE `user` SET `username` = '" + username + "'  WHERE `user`.`username` = '" + old_username + "';").executeUpdate();
 
             }
 
-            q = currentSession.createSQLQuery("UPDATE `staff` SET  `first_name` = '" + firstname + "', `last_name` = '" + lastname + "'," +
-                    " `position` = '" + position + "' WHERE `student`.`username` = '" + username + "'; ").executeUpdate();
+            currentSession.createSQLQuery("UPDATE `staff` SET  `first_name` = '" + firstname + "', `last_name` = '" + lastname + "'," +
+                    " `position` = '" + position + "' WHERE `staff`.`username` = '" + username + "'; ").executeUpdate();
 
         } catch (Exception e) {
             return false;

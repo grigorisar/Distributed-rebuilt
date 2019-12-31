@@ -15,11 +15,15 @@ public class HomeController {
         return "home/startpage";
     }
 
+    @RequestMapping("/access_denied")
+    public  String showAccessDenied() {
+        return "home/access-denied";
+    }
+
     @RequestMapping("/example")
     public String showCSSExample() {
         return "examples/example";
     }
-
 
     @RequestMapping("/showForm")
     public String showForm() {
