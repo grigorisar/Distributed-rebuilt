@@ -6,6 +6,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -17,7 +20,6 @@ public class StudentDAOImpl implements StudentDAO {
     // inject the session factory
     @Autowired
     private SessionFactory sessionFactory;
-
 
     @Override
     @Transactional
@@ -31,6 +33,23 @@ public class StudentDAOImpl implements StudentDAO {
         List<Student> students = query.getResultList();
         return students;
     }
+
+    @Override
+    @Transactional
+    public List<Student> getStudent(String username) {
+
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        System.out.println(username);
+
+        String hql = "FROM Student E WHERE E.username = :username";
+        Query query = currentSession.createQuery(hql);
+        query.setParameter("username",username);
+        List<Student> results = query.list();
+
+        return results;
+    }
+
 
     @Override
     @Transactional
@@ -136,21 +155,54 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     @Transactional
-    public Boolean savePetition(Petition petition,String studentID) {
-        /**
-         * This function is an INSERT tool ONLY.
-         */
-        try {
-            Session currentsession=sessionFactory.getCurrentSession();
-            Student student = currentsession.get(Student.class,studentID);
-            petition.setStudent(student);
+    public List<Petition> getSomePetitions() {
 
-            currentsession.save(petition);
-        } catch (Exception e) {
-            // TODO: handle exception
-            return false;
+    }
+
+    @Override
+    @Transactional
+    public boolean savePetition(String title, String description, String student_username) {
+
+//    public Boolean savePetition(Petition petition,String studentID) {
+//
+//            /**
+//             * This function is an INSERT tool ONLY.
+//             */
+//        try {
+//            Session currentsession=sessionFactory.getCurrentSession();
+//            Student student = currentsession.get(Student.class,studentID);
+//            petition.setStudent(student);
+//
+//            currentsession.save(petition);
+//        } catch (Exception e) {
+//            // TODO: handle exception
+//            return false;
+//        }
+//
+//        return true;
+//    }
+
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        String currentUserName = "current username not found";
+
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (!(authentication instanceof AnonymousAuthenticationToken)) {            //not sure about this check
+            currentUserName = authentication.getName();                                 //get user username from the session since it's needed for the query
         }
 
-        return true;
+            System.out.println(currentUserName);
+
+            try {
+
+            int q = currentSession.createSQLQuery("INSERT INTO `petition` (`id`, `title`, `description`, `status`, `student_username`) VALUES ( NULL, '" + title + "', '" +
+                    description + "', '" + "pending" + "', '" + currentUserName + "');").executeUpdate();
+
+
+        } catch (Exception e) {
+            return false;
+        }
+            return true;
     }
 }
