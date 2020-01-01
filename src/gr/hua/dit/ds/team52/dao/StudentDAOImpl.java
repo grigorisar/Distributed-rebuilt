@@ -153,11 +153,6 @@ public class StudentDAOImpl implements StudentDAO {
         return Petitions;
     }
 
-    @Override
-    @Transactional
-    public List<Petition> getSomePetitions() {
-
-    }
 
     @Override
     @Transactional

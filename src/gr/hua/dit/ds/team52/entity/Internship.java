@@ -21,8 +21,8 @@ public class Internship {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "approved")
-    private boolean approved;
+//    @Column(name = "approved")
+//    private boolean approved;
 
     public Internship() {
     }
@@ -63,11 +63,11 @@ public class Internship {
     }
 
 
-    public boolean getApproved() {
-        return approved;
-    }
+//    public boolean getApproved() {
+//        return approved;
+//    }
 
-    public void setApproved(boolean approved) {
-        this.approved = approved;
-    }
+//    public void setApproved(boolean approved) {
+//        this.approved = approved;
+//    }
 }

@@ -193,7 +193,7 @@ public class ManagerController {
         @PostMapping(value = "/update_user_process", produces = "plain/text")
         public String updateUser(WebRequest request ) {
 
-            String role = null,  username = null,  password = null, firstname = null, lastname = null, dept = null, position = null;
+            String role = null,  username = null,  password = null, firstname = null, lastname = null, position = null;
 
             String type = request.getParameter("type");
 
@@ -223,7 +223,7 @@ public class ManagerController {
                     if (role.contentEquals("ROLE_STUDENT" ) ) {             //check if it's a student or staff
 
                         failed = request.getParameter("failed_u");
-                        dept = request.getParameter("dept_u");
+                        String dept = request.getParameter("dept_u");
                         String year = request.getParameter("year_u");
 
     //                    Student student = new Student(firstname, lastname, username, dept, year, failed);

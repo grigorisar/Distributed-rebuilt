@@ -10,9 +10,11 @@ import java.util.List;
 
 public interface StaffDAO {
     public List<Petition> getPetitions();
+    public boolean acceptInternship(String title);
     public Service searchService(String title);
     public List<Staff> getStaff();
-    public List<Internship> getInternships();
+    public List<Internship> getInternshipsAccepted();
+    public List<Internship> getInternshipsPending();
     public Boolean saveStaff(Staff staff);
     public Boolean deleteStaff(String username);
     public boolean updateStaff(String old_username, String username, String firstname, String lastname, String position);

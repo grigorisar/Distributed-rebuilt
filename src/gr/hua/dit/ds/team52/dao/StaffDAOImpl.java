@@ -83,20 +83,33 @@ public class StaffDAOImpl implements StaffDAO {
     }
 
     @Override
-        @Transactional
-        public List<Internship> getInternships(){
-            Session currentSession = sessionFactory.getCurrentSession();
+    @Transactional
+    public List<Internship> getInternshipsPending(){
+        Session currentSession = sessionFactory.getCurrentSession();
 
-            // create a query
-            Query<Internship> query = currentSession.createQuery("from Internship", Internship.class);
+        // create a query
+        Query<Internship> query = currentSession.createQuery("from Internship I where I.status = 'pending' ", Internship.class);
 
-            // execute the query and get the results list
-            List<Internship> internships = query.getResultList();
-            return internships;
-        }
+        // execute the query and get the results list
+        List<Internship> internships = query.getResultList();
+        return internships;
+    }
 
     @Override
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
+    public List<Internship> getInternshipsAccepted(){
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        // create a query
+        Query<Internship> query = currentSession.createQuery("from Internship I where I.status = 'accepted' ", Internship.class);
+
+        // execute the query and get the results list
+        List<Internship> internships = query.getResultList();
+        return internships;
+    }
+
+    @Override
+    @Transactional
     public boolean updateStaff(String old_username, String username, String firstname, String lastname, String position) {
 
         Session currentSession = sessionFactory.getCurrentSession();
@@ -121,7 +134,7 @@ public class StaffDAOImpl implements StaffDAO {
     }
 
     @Override
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
     public boolean addStaff(String username, String password, String firstname, String lastname, String role, String position) {
         // get current hibernate session
         Session currentSession = sessionFactory.getCurrentSession();
@@ -141,6 +154,27 @@ public class StaffDAOImpl implements StaffDAO {
             return false;
         }
         return true;
+
+    }
+
+    @Override
+    @Transactional
+    public boolean acceptInternship(String title) {
+
+        Session currentSession = sessionFactory.getCurrentSession();
+
+//        UserEntity e = new UserEntity();
+//        StudentEntity s =new StudentEntity();
+
+        try {
+
+            int q = currentSession.createSQLQuery("UPDATE `internship` SET `status` = 'accepted'  WHERE `internship`.`title` = '" + title + "';").executeUpdate();
+
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+
 
     }
 }
