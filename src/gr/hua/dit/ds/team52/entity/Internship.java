@@ -1,30 +1,45 @@
 package gr.hua.dit.ds.team52.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "internship")
 public class Internship {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
     @Column(name = "title")
     private String title;
-
-    @Column(name = "description")
-    private String description;
-
     @Column(name = "salary")
     private int salary;
-
+    @Column(name = "description")
+    private String description;
     @Column(name = "status")
     private String status;
 
-//    @Column(name = "approved")
-//    private boolean approved;
+    //Company of internship
+    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
 
-    public Internship() {
+    //Petitions for the position
+    @OneToMany(mappedBy = "internship",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<Petition> petitions;
+
+    public Internship(){};
+    public Internship(String title, String description, String status, int salary) {
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.salary = salary;
+    }
+
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -62,8 +77,26 @@ public class Internship {
         this.status = status;
     }
 
+    public Company getCompany() {
+        return company;
+    }
 
-//    public boolean getApproved() {
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public List<Petition> getPetitions() {
+        return petitions;
+    }
+
+    public void addPetition(Petition petition) {
+        if (petitions == null){
+            petitions = new ArrayList<>();
+        }
+        this.petitions.add(petition);
+    }
+
+    //    public boolean getApproved() {
 //        return approved;
 //    }
 //

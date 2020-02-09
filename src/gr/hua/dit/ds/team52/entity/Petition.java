@@ -8,16 +8,31 @@ public class Petition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private String id;
+    private int id;
 
     @Column(name = "title", nullable = true, length = 45)
     private String title;
-
+    @Column(name = "student_username")
+    private String student_username;
+    @Column(name = "status", nullable = false, length = 8)
+    private String status;
     @Column(name = "description", nullable = true)
     private String description;
+    @Column(name = "company_name")
+    private String company_name;
 
-    @Column(name = "status", nullable = true)
-    private String status;
+    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.LAZY)
+    @JoinColumn(name="internship_id")
+    private Internship internship;
+
+
+    public String getCompany_name() {
+        return company_name;
+    }
+
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
+    }
 
     public String getStatus() {
         return status;
@@ -34,9 +49,6 @@ public class Petition {
     public void setStudent_username(String student_username) {
         this.student_username = student_username;
     }
-
-    @Column(name = "student_username")
-    private String student_username;
 
 //    @Column(name = "status", nullable = false, length = 8)
 //    private String status;
@@ -55,12 +67,8 @@ public class Petition {
 //        this.status = status;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -79,6 +87,13 @@ public class Petition {
         this.description = description;
     }
 
+    public Internship getInternship() {
+        return internship;
+    }
+
+    public void setInternship(Internship internship) {
+        this.internship = internship;
+    }
 //    public String getStatus() {
 //        return status;
 //    }

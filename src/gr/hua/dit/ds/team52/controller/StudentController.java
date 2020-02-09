@@ -1,7 +1,9 @@
 package gr.hua.dit.ds.team52.controller;
 
+import gr.hua.dit.ds.team52.dao.CompanyDAO;
 import gr.hua.dit.ds.team52.dao.StudentDAO;
 import gr.hua.dit.ds.team52.dao.UserDAO;
+import gr.hua.dit.ds.team52.entity.Company;
 import gr.hua.dit.ds.team52.entity.Petition;
 import gr.hua.dit.ds.team52.entity.Student;
 import org.hibernate.Session;
@@ -26,6 +28,8 @@ public class StudentController {
     //Inject DAO its the same for all objects
     @Autowired
     private UserDAO userDAO;
+    @Autowired
+    private CompanyDAO companyDAO;
 
     @Autowired
     private StudentDAO studentDAO;
@@ -38,6 +42,8 @@ public class StudentController {
 
     @RequestMapping("/new_petition")
     public String createPetitionJSP(Model model){
+        List<Company> companies = companyDAO.getCompanies();
+        model.addAttribute("companies",companies);
         return "student/create-petition";
     }
 
