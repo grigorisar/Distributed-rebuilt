@@ -1,9 +1,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header-footer.css">
+<%@ include file="../../resources/navbar.jsp"%>
 
 <title>Application</title>
-<link rel="stylesheet" type="text/css" href="/resources/navbar.jsp">
+<link rel="stylesheet" type="text/css" href="/resources/header-footer.css">
 <body>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
