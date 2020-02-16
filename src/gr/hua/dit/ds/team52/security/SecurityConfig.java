@@ -62,15 +62,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/internship/**").permitAll()
                 .antMatchers("/access_denied").permitAll()
                 .antMatchers("/login").permitAll()
-//                .antMatchers("/create").permitAll()                         //for the create user page
-//                .antMatchers("/create_user_process").permitAll()            //and permit the user creation process
-                .antMatchers("/rep/**").permitAll()
-//                .antMatchers("/manager/**").hasAnyRole(fetchServiceRoles("Manage Application"))
-//                .antMatchers("/student/**").hasAnyRole(fetchServiceRoles("Create Petition"))
-//                .antMatchers("/staff/petition_list/**").hasAnyRole(fetchServiceRoles("Examine Petitions"))
-//                .antMatchers("/staff/internship_list/**").hasAnyRole(fetchServiceRoles("Examine Internships"))
+                .antMatchers("/create").permitAll()                         //for the create user page
+                .antMatchers("/create_user_process").permitAll()            //and permit the user creation process
+                .antMatchers("/manager/**").hasAnyRole(fetchServiceRoles("Manage Application"))
+                .antMatchers("/student/**").hasAnyRole(fetchServiceRoles("Create Petition"))
+                .antMatchers("/staff/petition_list/**").hasAnyRole(fetchServiceRoles("Examine Petitions"))
+                .antMatchers("/staff/internship_list/**").hasAnyRole(fetchServiceRoles("Examine Internships"))
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
