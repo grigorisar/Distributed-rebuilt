@@ -1,19 +1,18 @@
 package gr.hua.dit.ds.team52.controller;
 
 
+import com.google.gson.Gson;
 import gr.hua.dit.ds.team52.dao.ServiceDAO;
 import gr.hua.dit.ds.team52.dao.StaffDAO;
 import gr.hua.dit.ds.team52.dao.StudentDAO;
 import gr.hua.dit.ds.team52.dao.UserDAO;
 import gr.hua.dit.ds.team52.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletResponse;
@@ -117,6 +116,8 @@ public class ManagerController {
         serviceDAO.deleteRole(role);
         return "Role Deleted.";
     }
+
+
 
     @ResponseBody
     @RequestMapping (value ="/create_service" , method = RequestMethod.POST)
@@ -262,6 +263,28 @@ public class ManagerController {
         if ( !v ) return "Deletion Failed";
 
         return "Deletion Successful";
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/get_students_json", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getStudentsJson(WebRequest request ,HttpServletResponse response ,Model model) {
+
+        List<Student> students = userDAO.getStudents();
+
+        Gson gson = new Gson();
+
+        return gson.toJson(students);
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/get_staff_json", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getStaffJson(WebRequest request ,HttpServletResponse response ,Model model) {
+
+        List<Staff> staff = userDAO.getStaff();
+
+        Gson gson = new Gson();
+
+        return gson.toJson(staff);
     }
 
 

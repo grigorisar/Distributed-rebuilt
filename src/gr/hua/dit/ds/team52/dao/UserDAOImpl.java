@@ -38,6 +38,26 @@ public class UserDAOImpl implements UserDAO {
         // return the results
         return users;
     }
+
+    @Override
+    @Transactional
+    public User getUserByName(String username) {
+        // get current hibernate session
+        Session currentsession=sessionFactory.getCurrentSession();
+
+        return currentsession.createQuery("from User S where S.username ='"+username+"'", User.class).getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public Authorities getUserAuthority(String username) {
+        // get current hibernate session
+        Session currentsession=sessionFactory.getCurrentSession();
+
+        Authorities a = currentsession.createQuery("from Authorities S where S.username ='"+username+"'", Authorities.class).getSingleResult();
+
+        return a;
+    }
     @Override
     @Transactional
     public Boolean saveUser(User user) {

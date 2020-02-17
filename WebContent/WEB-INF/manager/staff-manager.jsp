@@ -209,11 +209,51 @@
 
 <script type="text/javascript">
 
+
+
+    var table = $('#table').DataTable();
+
     $('table tr').mouseover(function() {    //on hover color script
         $(this).addClass('hovered');
     }).mouseout(function() {
         $(this).removeClass('hovered');
     });
+
+    function append_json(data) {
+        var table = $('#table').DataTable();
+        var t = document.getElementById('table');
+
+        // table.rows().remove;
+        table.clear();
+        data.forEach(function (object) {
+
+            table.row.add( [
+                object.id,
+                object.firstName,
+                object.lastName,
+                object.username,
+                object.position
+            ] ).draw(true);
+
+        });
+    };
+
+    function refresh() {
+        $("#table_body" ).empty();
+
+        let u = ("${pageContext.request.contextPath}/manager/get_staff_json");
+
+
+        $.getJSON( u, function (data) {
+            console.log(data);
+
+            // var data = JSON.parse(this.responseText); // convert the response to a json object
+            append_json(data);// pass the json object to the append_json function
+
+
+        });
+
+    }
 
     function highlight(e) {                           //highlight function
         if (selected[0]) {
@@ -343,6 +383,7 @@
                 },
                 complete: function () {                             //on completion
                     console.log("creation finished")
+                    refresh();
                 }
             });
 
@@ -372,6 +413,7 @@
                 },
                 complete: function () {                             //on completion
                     console.log("update finished")
+                    refresh();
                 }
             });
 
@@ -406,6 +448,7 @@
                 },
                 complete: function () {                             //on completion
                     console.log("deletion finished")
+                    refresh();
                 }
             });
 

@@ -167,7 +167,7 @@
                     //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
                     console.log("posting sucessful");
                     $("#bottom1").empty().append(data);
-                    window.location.reload();
+                    // window.location.reload();
                 },
                 error: function(xhr, request, error) {                                 //on error
                     //  = eval("(" + xhr.responseText + ")");       //eval is evil dont use it

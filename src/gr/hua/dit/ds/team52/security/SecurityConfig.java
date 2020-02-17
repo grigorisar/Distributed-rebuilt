@@ -1,5 +1,6 @@
 package gr.hua.dit.ds.team52.security;
 
+import gr.hua.dit.ds.team52.CustomAuthenticationProvider;
 import gr.hua.dit.ds.team52.dao.ServiceDAO;
 import gr.hua.dit.ds.team52.entity.Role;
 import gr.hua.dit.ds.team52.entity.Service;
@@ -32,6 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource myDataSource;
 
+    @Autowired
+    private CustomAuthenticationProvider authProvider;
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
@@ -39,6 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth.inMemoryAuthentication().withUser("john").password("{noop}test123").roles("STUDENT");        // "ROLE_" is automatically added
 //        auth.inMemoryAuthentication().withUser("mary").password("{noop}test123").roles("STAFF");
 //        auth.inMemoryAuthentication().withUser("susan").password("{noop}test123").roles("ADMIN");
+
+//        auth.authenticationProvider(authProvider);
 
         auth.jdbcAuthentication()
                 .dataSource(myDataSource)
@@ -49,8 +56,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select username, authority "       //table to find the role of user
                         + "from authorities "
                         + "where username = ?");
-
-
     }
 
     private PasswordEncoder passwordEncoder() {
@@ -60,7 +65,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests()
+        http
+                .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/internship/**").permitAll()
                 .antMatchers("/access_denied").permitAll()
@@ -76,8 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .and()
                 .exceptionHandling().accessDeniedPage("/access_denied");
-//                .and()
-//                .csrf().disable();
+//                .and().httpBasic();
 
         //.loginProcessingUrl("/authUser") //TODO custom controller page
     }

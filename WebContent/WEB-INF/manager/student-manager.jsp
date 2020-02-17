@@ -145,7 +145,6 @@
 
         </form>
 
-        <div id="bottom1"></div>
 
     </div>
     <div align="center" class="pure-u-1-3">
@@ -212,7 +211,6 @@
             </form>
 
         </div>
-        <div id="bottom2"></div>
     </div>
     <div align="center" class="pure-u-1-3" >
 
@@ -245,16 +243,57 @@
 
 
     </div>
-    <div id="bottom3"></div>
 </div>
 
+<div align="center" id="bottom"> </div>
+
 <script type="text/javascript">
+
+    var table = $('#table').DataTable();
 
     $('table tr').mouseover(function() {    //on hover color script
         $(this).addClass('hovered');
     }).mouseout(function() {
         $(this).removeClass('hovered');
     });
+
+    function append_json(data) {
+        var table = $('#table').DataTable();
+        var t = document.getElementById('table');
+
+        // table.rows().remove;
+        table.clear();
+        data.forEach(function (object) {
+
+            table.row.add( [
+                object.id,
+                object.firstName,
+                object.lastName,
+                object.username,
+                object.dept,
+                object.year,
+                object.failed
+            ] ).draw(true);
+
+        });
+    };
+
+    function refresh() {
+        $("#table_body" ).empty();
+
+        let u = ("${pageContext.request.contextPath}/manager/get_students_json");
+
+
+        $.getJSON( u, function (data) {
+            console.log(data);
+
+            // var data = JSON.parse(this.responseText); // convert the response to a json object
+            append_json(data);// pass the json object to the append_json function
+
+
+        });
+
+    }
 
     function highlight(e) {                           //highlight function
         if (selected[0]) {
@@ -282,7 +321,7 @@
             // console.log("you clicked me")
             // $("#user_creation").toggle();
             $('#user_creation').trigger("reset");    //reset form
-            $('#bottom1').empty();
+            // $('#bottom1').empty();
 
             if (  $("#user_creation").css('display') === 'none' ) {
                 $("#user_creation").show();
@@ -297,7 +336,7 @@
         $("#updateStudent").click (function(e) {
 
             $('#user_update').trigger("reset");
-            $('#bottom2').empty();
+            // $('#bottom').empty();
             if (  $("#update").css('display') == 'none' ) {
                 $("#update").show();
 
@@ -346,7 +385,7 @@
             } else {
                 $("#delete").hide();
                 $('#delete').trigger("reset");    //reset form
-                // $('#bottom3').empty();
+                // $('#bottom').empty();
 
             }
 
@@ -374,19 +413,20 @@
                 success: function(data) {                                   //on success of ajax
                     //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
                     console.log("posting sucessful");
-                    $("#bottom1").empty().append(data);
-                    window.location.reload();
+                    $("#bottom").empty().append(data);
+                    // window.location.reload();
                 },
                 error: function(xhr, request, error) {                                 //on error
                     //  = eval("(" + xhr.responseText + ")");       //eval is evil dont use it
                     // alert(err.Message);
                     let err = xhr.responseText;
                     alert(err);
-                    $('#bottom1').empty().append("Error Encountered with request " + error);
+                    $('#bottom').empty().append("Error Encountered with request " + error);
 
                 },
                 complete: function () {                             //on completion
                     console.log("creation finished");
+                    refresh();
                 }
             });
 
@@ -406,16 +446,17 @@
                 // dataType: "plain/text",
                 success: function(data) {
                     console.log("posting sucessful");
-                    $("#bottom2").empty().append(data);
-                    window.location.reload();
+                    $("#bottom").empty().append(data);
+                    // window.location.reload();
                 },
                 error: function(xhr, request, error) {
                     var err = xhr.responseText;
                     alert(err);
-                    $('#bottom2').empty().append("Error Encountered with request " + error);
+                    $('#bottom').empty().append("Error Encountered with request " + error);
                 },
                 complete: function () {                             //on completion
                     console.log("update finished");
+                    refresh();
                 }
             });
 
@@ -440,16 +481,17 @@
                 // dataType: "plain/text",
                 success: function(data) {
                     console.log("posting sucessful");
-                    $("#bottom3").empty().append(data);
-                    window.location.reload();
+                    $("#bottom").empty().append(data);
+                    // window.location.reload();
                 },
                 error: function(xhr, request, error) {
                     var err = xhr.responseText;
                     alert(err);
-                    $('#bottom3').empty().append("Error Encountered with request " + error);
+                    $('#bottom').empty().append("Error Encountered with request " + error);
                 },
                 complete: function () {                             //on completion
                     console.log("deletion finished");
+                    refresh();
                 }
             });
 

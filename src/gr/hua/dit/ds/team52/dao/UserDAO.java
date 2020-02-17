@@ -12,6 +12,8 @@ public interface UserDAO {
     public Boolean saveAuthority(String username,String role);//TODO MAYBE DELETE THIS LATER
 
     public List<User> getUserList();
+    public User getUserByName(String username);
+    public Authorities getUserAuthority(String username);
     public Boolean saveUser(User user);
     public Boolean deleteUser(String username);
 

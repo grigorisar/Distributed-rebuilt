@@ -42,7 +42,7 @@
                             </optgroup>
                         </c:if>
                     </c:forEach>
-                </select>
+                    </select>
                 <textarea required name="description" placeholder="Description and Why Should We Choose You"></textarea>
                 <input type="text" name="comments" placeholder="Additional Comments">
                 <input type="submit" value="Submit" onsubmit="console.log('send')" />
@@ -54,7 +54,6 @@
 
 <footer>
     <p>All rights reserved... Team52 Co.</p>
-    <small> Wish you luck, <a href="http://github.com/grigorisar">Gregory</a>.</small>
 </footer>
 </body>
 
@@ -62,7 +61,7 @@
     $(document).ready(function () {
         var form =$("#create_petition").submit(function (event) {
             event.preventDefault();
-            console.log(form);
+            // console.log(form);
 
             var $form = $(this),
                 url = $form.attr('action');
@@ -71,13 +70,13 @@
             $.ajax({
                 type: "POST",
                 url: url,
-                data : $('#create_petition').serialize(),
+                data : $("#create_petition").serialize(),
                 // dataType: "plain/text",
                 success: function(data) {                                   //on success of ajax
                     //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
                     console.log("posting sucessful");
                     $("#bottom1").empty().append(data);
-                    window.location.reload();
+                    // window.location.reload();
                 },
                 error: function(xhr, request, error) {                                 //on error
                     //  = eval("(" + xhr.responseText + ")");       //eval is evil dont use it
@@ -87,7 +86,7 @@
                     $('#bottom1').empty().append("Error Encountered with request " + error)
                 },
                 complete: function () {                             //on completion
-                    console.log(data);
+                    // console.log(data);
 
                     console.log("submission finished");
                 }

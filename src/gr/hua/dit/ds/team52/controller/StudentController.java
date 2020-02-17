@@ -88,7 +88,7 @@ public class StudentController {
 
         Student student = userDAO.getStudentByUsername(currentUserName);
         if (student.canSubmit()){ //if true
-            Petition p = new Petition(title, description, "doesn't matter");
+            Petition p = new Petition(title, description, "pending");
 
             p.setStudent_username(currentUserName);
             boolean v = studentDAO.savePetition(p);
