@@ -241,7 +241,7 @@
 
         $("#updateService").click (function(e) {
 
-            $('#user_update').trigger("reset");
+            $('#role_update').trigger("reset");
             $('#bottom2').empty();
             if (  $("#update").css('display') == 'none' ) {
                 $("#update").show();

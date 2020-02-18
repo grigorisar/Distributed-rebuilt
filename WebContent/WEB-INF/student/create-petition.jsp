@@ -1,10 +1,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header-footer.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/header_footer.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/form.css">
 <%@ include file="../../resources/navbar.jsp"%>
 
 <title>Application</title>
-<link rel="stylesheet" type="text/css" href="/resources/header-footer.css">
 <body>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -23,7 +23,7 @@
 </header>
 
 <main>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/form.css">
+<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/header_footer.css">--%>
     <div class="square">
         <div class="form-style-6">
             <h1>Petition for Internship</h1>
@@ -46,6 +46,10 @@
                 <textarea required name="description" placeholder="Description and Why Should We Choose You"></textarea>
                 <input type="text" name="comments" placeholder="Additional Comments">
                 <input type="submit" value="Submit" onsubmit="console.log('send')" />
+
+                <input type="hidden"
+                       name="${_csrf.parameterName}"
+                       value="${_csrf.token}"/>
             </form>
             <div id="bottom1"></div>
         </div>
@@ -86,9 +90,7 @@
                     $('#bottom1').empty().append("Error Encountered with request " + error)
                 },
                 complete: function () {                             //on completion
-                    // console.log(data);
-
-                    console.log("submission finished");
+                    console.log(data);
                 }
             });
             event.preventDefault();

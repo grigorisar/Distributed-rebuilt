@@ -64,7 +64,7 @@ public class Petition {
     public Petition(String title,String description,String status){
         this.title = title;
         this.description = description;
-//        this.status = status;
+        this.status = status;
     }
 
     public int getId() {

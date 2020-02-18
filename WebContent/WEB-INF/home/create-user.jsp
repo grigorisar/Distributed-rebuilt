@@ -31,7 +31,7 @@
 
     <br>
 
-    <form  id="user_details" name="user_creation" method="post" action="${pageContext.request.contextPath}/create_user_process">
+    <form  id="user_details" name="role_creation" method="post" action="${pageContext.request.contextPath}/create_user_process">
 
         <div class="form-group">
             <label for="username">Username</label> <br>

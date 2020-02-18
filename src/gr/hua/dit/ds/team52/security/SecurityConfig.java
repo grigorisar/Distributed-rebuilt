@@ -75,8 +75,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/create_user_process").permitAll()            //and permit the user creation process
                 .antMatchers("/manager/**").hasAnyRole(fetchServiceRoles("Manage Application"))
                 .antMatchers("/student/**").hasAnyRole(fetchServiceRoles("Create Petition"))
+                .antMatchers("/student/create_petition_process").hasAnyRole(fetchServiceRoles("Create Petition"))
                 .antMatchers("/staff/petition_list/**").hasAnyRole(fetchServiceRoles("Examine Petitions"))
                 .antMatchers("/staff/internship_list/**").hasAnyRole(fetchServiceRoles("Examine Internships"))
+                .antMatchers("/resources/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

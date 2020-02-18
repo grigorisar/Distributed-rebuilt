@@ -4,6 +4,7 @@ import gr.hua.dit.ds.team52.dao.CompanyDAO;
 import gr.hua.dit.ds.team52.dao.StudentDAO;
 import gr.hua.dit.ds.team52.dao.UserDAO;
 import gr.hua.dit.ds.team52.entity.Company;
+import gr.hua.dit.ds.team52.entity.Internship;
 import gr.hua.dit.ds.team52.entity.Petition;
 import gr.hua.dit.ds.team52.entity.Student;
 import org.hibernate.Session;
@@ -79,18 +80,21 @@ public class StudentController {
 
         String description = request.getParameter("description");
 
+        String internshipName = request.getParameter("company");
         String currentUserName = null;
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {            //not 100% sure what this if is about  TODO check this condition
             currentUserName = authentication.getName();                             //get the logged in user's username
         }
-
+        Internship intern =companyDAO.getInternshipByName(internshipName);
         Student student = userDAO.getStudentByUsername(currentUserName);
         if (student.canSubmit()){ //if true
             Petition p = new Petition(title, description, "pending");
-
+            p.setCompany_name(intern.getCompany().getCompanyName());
+            p.setInternship(intern);
             p.setStudent_username(currentUserName);
+
             boolean v = studentDAO.savePetition(p);
 
             if ( v ) return "Petition successfully added";

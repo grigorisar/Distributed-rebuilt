@@ -1,7 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%--    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>--%>
-
     <style>
         ul {
             list-style-type: none;
@@ -55,11 +53,11 @@
         }
     </style>
 
-<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js%22%3E"> </script>
-<script>
-    const darkmode =  new Darkmode();
-    darkmode.toggle();
-</script>
+<%--<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js%22%3E"> </script>--%>
+<%--<script>--%>
+<%--    const darkmode =  new Darkmode();--%>
+<%--    darkmode.toggle();--%>
+<%--</script>--%>
 
 <ul>
     <li><a href="${pageContext.request.contextPath}">Home</a></li>
